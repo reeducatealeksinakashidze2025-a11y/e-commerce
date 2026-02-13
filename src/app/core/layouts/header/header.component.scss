@@ -1,0 +1,26 @@
+.navbar {
+  border-bottom: 1px solid #ddd;
+
+  .nav-link.active {
+    border-bottom: 2px solid #93CEFC;
+    font-weight: 600;
+  }
+
+  .lang-switch button {
+    font-weight: 600;
+    color: #111827;
+
+    &:hover {
+      color:#93CEFC;
+    }
+  }
+}
+
+.navbar-toggler {
+  margin-left: auto; 
+}
+
+.navbar-brand{
+  font-weight: 700;
+  font-size: 1.3rem;
+}

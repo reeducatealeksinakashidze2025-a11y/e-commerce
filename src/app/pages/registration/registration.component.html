@@ -1,0 +1,135 @@
+<div class="register-container">
+  <h2 class="form-title">Register</h2>
+  <div *ngIf="errorMessage" class="field-error">
+    {{ errorMessage }}
+  </div>
+  <form (ngSubmit)="register(registerForm)" #registerForm="ngForm" class="register-form">
+    <!-- First Name -->
+    <div class="form-group">
+      <label for="fullName">Full Name</label>
+      <input
+        type="text"
+        id="fullName"
+        [(ngModel)]="fullName"
+        #firstNameRef="ngModel"
+        name="fullName"
+        required
+      />
+      <div *ngIf="firstNameRef.invalid && (firstNameRef.touched || registerForm.submitted)" class="field-error">
+        First name is required.
+      </div>
+    </div>
+  
+   
+   
+    <!-- Birth Date -->
+    <div class="form-group">
+      <label for="birthDate">Birth Date</label>
+      <input
+        type="date"
+        id="birthDate"
+        [(ngModel)]="birthDate"
+        #birthDateRef="ngModel"
+        name="birthDate"
+        required
+      />
+      <div *ngIf="birthDateRef.invalid && (birthDateRef.touched || registerForm.submitted)" class="field-error">
+        Birth date is required.
+      </div>
+    </div>
+  
+    <!-- Gender -->
+    <div class="form-group">
+      <label for="gender">Gender</label>
+      <select
+        id="gender"
+        [(ngModel)]="gender"
+        #genderRef="ngModel"
+        name="gender"
+        required
+      >
+        <option value="">Select Gender</option>
+        <option value="1">Male</option>
+        <option value="2">Female</option>
+        <option value="3">Other</option>
+      </select>
+      <div *ngIf="genderRef.invalid && (genderRef.touched || registerForm.submitted)" class="field-error">
+        Gender is required.
+      </div>
+    </div>
+  
+    <!-- Username -->
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        id="username"
+        [(ngModel)]="username"
+        #usernameRef="ngModel"
+        name="username"
+        required
+        minlength="4"
+      />
+      <div *ngIf="usernameRef.invalid && (usernameRef.touched || registerForm.submitted)" class="field-error">
+        Username is required and must be at least 4 characters.
+      </div>
+    </div>
+    <!-- Email -->
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        [(ngModel)]="email"
+        #emailRef="ngModel"
+        name="email"
+        required
+      />
+      <div *ngIf="emailRef.invalid && (emailRef.touched || registerForm.submitted)" class="field-error">
+        Email is required and must be valid.
+      </div>
+    </div>
+  
+    <!-- Password -->
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        [(ngModel)]="password"
+        #passwordRef="ngModel"
+        name="password"
+        required
+        minlength="6"
+      />
+      <div *ngIf="passwordRef.invalid && (passwordRef.touched || registerForm.submitted)" class="field-error">
+        Password is required and must be at least 6 characters.
+      </div>
+    </div>
+  
+    <!-- Confirm Password -->
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password</label>
+      <input
+        type="password"
+        id="confirmPassword"
+        [(ngModel)]="confirmPassword"
+        #confirmPasswordRef="ngModel"
+        name="confirmPassword"
+        required
+      />
+      <div *ngIf="confirmPasswordRef.invalid && (confirmPasswordRef.touched || registerForm.submitted)" class="field-error">
+        Confirm password is required.
+      </div>
+      <div *ngIf="password !== confirmPassword && confirmPasswordRef.touched" class="field-error">
+        Passwords do not match.
+      </div>
+    </div>
+  
+    <button type="submit" class="btn">Register</button>
+  </form>
+  
+  <p class="home-link">
+    <a routerLink="/">Return to Home</a>
+  </p>
+</div>

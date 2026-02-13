@@ -1,0 +1,106 @@
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f9f9f9;
+    margin: 0;
+  }
+  
+  .login-form {
+    width: 300px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column; /* ეს დაეხმარება ელემენტების ვერტიკალურ განლაგებას */
+    gap: 10px; /* ელემენტებს შორის სივრცე */
+  }
+  
+  .form-title {
+    text-align: center;
+    margin: 0 0 20px 0; /* ქვედა სივრცე ჰედერისთვის */
+    color: #333;
+    font-family: Arial, sans-serif;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column; /* ლეიბლი და ინპუტი ვერტიკალურად დალაგდეს */
+  }
+  
+  label {
+    margin-bottom: 5px; /* ლეიბლისა და ინპუტის შორის სივრცე */
+    font-weight: bold;
+  }
+  
+  input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .btn:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+
+  .register-link {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .register-link a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .register-link a:hover {
+    text-decoration: underline;
+  }
+  .home-link {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .home-link a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .home-link a:hover {
+    text-decoration: underline;
+  }
+  .error-message{
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center; /* ტექსტის ცენტრში განლაგება */
+  }

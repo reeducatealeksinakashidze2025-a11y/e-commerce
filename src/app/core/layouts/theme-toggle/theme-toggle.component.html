@@ -1,0 +1,18 @@
+<!-- 
+<button class="btn btn-outline-secondary" (click)="toggleTheme()">🌓
+</button> -->
+<div class="d-flex align-items-center gap-2">
+  <button class="btn" [ngClass]="currentTheme === 'dark' ? 'btn-outline-light' : 'btn-outline-dark'"
+    (click)="toggleTheme()">
+    🌓
+  </button>
+  <div class="dropdown">
+    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+      <i class="bi bi-globe"></i>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end">
+      <li><button class="dropdown-item" (click)="switchLang('en')">English</button></li>
+      <li><button class="dropdown-item" (click)="switchLang('ka')">ქართული</button></li>
+    </ul>
+  </div>
+</div>

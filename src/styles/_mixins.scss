@@ -1,0 +1,20 @@
+/* src/styles/_mixins.scss */
+
+// @mixin respond($bp) {
+//   @if $bp == sm { @media (max-width: $bp-sm) { @content; } }
+//   @else if $bp == md { @media (max-width: $bp-md) { @content; } }
+//   @else if $bp == lg { @media (max-width: $bp-lg) { @content; } }
+// }
+@use 'variables' as vars;
+
+@mixin respond($bp) {
+  @if $bp == sm {
+    @media (max-width: vars.$bp-sm) { @content; }
+  }
+  @else if $bp == md {
+    @media (max-width: vars.$bp-md) { @content; }
+  }
+  @else if $bp == lg {
+    @media (max-width: vars.$bp-lg) { @content; }
+  }
+}

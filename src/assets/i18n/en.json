@@ -1,0 +1,43 @@
+{
+  "HOME": {
+    "TITLE": "Home"
+  },
+   "BLOG": {
+    "TITLE": "Blog"
+  },
+  "ABOUT": {
+    "TITLE": "About"
+  },
+  "NEWSLETTER": {
+    "TITLE": "Newsletter"
+  },
+  "LOGIN": {
+    "TITLE": "Login",
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "BUTTON": "Sign In"
+  },
+  "REGISTER": {
+    "TITLE": "Register",
+    "NAME": "Full Name",
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "BUTTON": "Sign Up"
+  },
+  "CABINET": {
+    
+      "DASHBOARD": {
+      "TITLE": "Dashboard"
+      },
+      "MYARTICLES": { 
+        "TITLE": "My Articles"
+      },
+      "PROFILE": {
+        "TITLE": "Profile",
+        "LOGOUT": "Logout"
+      }
+ 
+    
+  }
+  
+}

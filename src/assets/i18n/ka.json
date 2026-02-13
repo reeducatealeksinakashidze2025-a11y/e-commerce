@@ -1,0 +1,42 @@
+{
+  "HOME": {
+    "TITLE": "მთავარი"
+  },
+  "BLOG": {
+    "TITLE": "ბლოგი"
+  },
+  "ABOUT": {
+    "TITLE": "შესახებ"
+  },
+  "NEWSLETTER": {
+    "TITLE": "სიახლეები"
+  },
+  "LOGIN": {
+    "TITLE": "ავტორიზაცია",
+    "EMAIL": "ელფოსტა",
+    "PASSWORD": "პაროლი",
+    "BUTTON": "შესვლა"
+  },
+  "REGISTER": {
+    "TITLE": "რეგისტრაცია",
+    "NAME": "სრული სახელი",
+    "EMAIL": "ელფოსტა",
+    "PASSWORD": "პაროლი",
+    "BUTTON": "რეგისტრაცია"
+  },
+    "CABINET": {
+    
+      "DASHBOARD": {
+      "TITLE": "დეშბორდი"
+      },
+      "MYARTICLES": { 
+        "TITLE": "ჩემი სტატიები"
+      },
+       "PROFILE": {
+        "TITLE": "პროფილი",
+        "LOGOUT": "გამოსვლა"
+      }
+ 
+    
+  }
+}

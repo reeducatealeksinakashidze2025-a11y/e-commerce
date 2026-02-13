@@ -1,0 +1,27 @@
+.layout-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+//   background: #f9f9f9; // სურვილისამებრ, ფონისთვის
+}
+
+.layout-header,
+.layout-footer,
+.layout-main {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 1rem 0;
+}
+
+.content-container {
+  width: 100%;
+  max-width: 1200px; // შეგიძლია შეცვალო 1000 ან 1400
+//   padding: 0 1rem; // შიდა სივრცე მობილურზე
+//   background: white; // სურვილისამებრ
+}
+
+.layout-main {
+  flex: 1; // რომ მთავარმა ნაწილმა დაიკავოს დარჩენილი სივრცე
+  padding: 2rem 0;
+}

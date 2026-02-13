@@ -1,0 +1,25 @@
+.hero {
+  background-color: #FBF9F7;
+  color: #4A4846;
+  text-align: center;
+  padding: 40px 20px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+
+  h1 { font-size: 2rem; margin-bottom: 12px; }
+  p { font-size: 1.2rem; }
+}
+
+.divider {
+  margin: 20px 0;
+  border: 0;
+  height: 1px;
+  background: #ddd;
+}
+
+// .blogs-grid {
+//   display: grid;
+//   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+//   gap: 28px;
+//   margin-top: 20px;
+// }

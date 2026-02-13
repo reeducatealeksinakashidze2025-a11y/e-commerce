@@ -1,0 +1,54 @@
+<!-- <div class="dashboard">
+  <h2>ბლოგები</h2>
+
+  <input
+    type="text"
+    placeholder="ძებნა სათაურით..."
+    [(ngModel)]="searchTerm"
+    (input)="onSearch()"
+    class="search-input"
+  />
+
+  <div *ngIf="blogs.length; else noBlogs">
+    <div *ngFor="let blog of blogs" class="blog-card">
+      <h3>{{ blog.title }}</h3>
+  <p [innerHTML]="sanitizeHtml(blog.contentHtml)"></p>
+       <small>ავტორი: {{ blog.author?.fullName || 'უცნობი' }}</small>
+      <hr>
+    </div>
+  </div>
+
+  <ng-template #noBlogs>
+    <p>ბლოგები ვერ მოიძებნა.</p>
+  </ng-template>
+</div>
+ -->
+<div class="dashboard">
+  <h2>ბლოგები</h2>
+
+  <input
+    type="text"
+    placeholder="ძებნა სათაურით..."
+    [(ngModel)]="searchTerm"
+    (input)="onSearch()"
+    class="search-input"
+  />
+
+  <!-- <div *ngIf="blogs.length; else noBlogs">
+    <app-blog-card
+      *ngFor="let blog of blogs"
+      [blog]="blog"
+    ></app-blog-card>
+  </div> -->
+    <app-pagination
+    [page]="page"
+    [pageSize]="pageSize"
+    [totalCount]="totalCount"
+    (pageChange)="onPageChange($event)">
+</app-pagination>
+
+  <ng-template #noBlogs>
+    <p>ბლოგები ვერ მოიძებნა.</p>
+  </ng-template>
+</div>
+

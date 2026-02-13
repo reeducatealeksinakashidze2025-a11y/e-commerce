@@ -1,0 +1,62 @@
+<header>
+  <nav class="navbar navbar-expand-md navbar-light bg-light" data-bs-theme="light">
+    <div class="container">
+      <a class="navbar-brand" routerLink="/">Personal Blog</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{
+              'CABINET.DASHBOARD.TITLE' | translate }}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="my-articles" routerLinkActive="active">{{ 'CABINET.MYARTICLES.TITLE' |
+              translate }}</a>
+          </li>
+          <!-- <li class="nav-item">
+          <a class="nav-link" routerLink="/about" routerLinkActive="active">{{ 'ABOUT.TITLE' | translate }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/newsletter" routerLinkActive="active">{{ 'NEWSLETTER.TITLE' | translate
+            }}</a>
+        </li> -->
+        </ul>
+      </div>
+
+      <div class="d-flex align-items-center gap-3 ms-3">
+        <app-theme-toggle></app-theme-toggle>
+        <!-- Profile dropdown -->
+        <div class="dropdown">
+          <a class="d-flex align-items-center text-decoration-none dropdown-toggle" href="#" id="profileDropdown"
+            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="../assets/images/profile-avatar.png" alt="Profile" width="32" height="32" class="rounded-circle" />
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+            <li>
+              <a class="dropdown-item" routerLink="profile">{{ 'CABINET.PROFILE.TITLE' | translate }}</a>
+            </li>
+            <li>
+              <hr class="dropdown-divider" />
+            </li>
+            <li>
+              <a class="dropdown-item" (click)="logout()">{{ 'CABINET.PROFILE.LOGOUT' | translate }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<main id="main" class="layout-main" role="main">
+  <div class="content-container">
+    <router-outlet></router-outlet>
+  </div>
+</main>
+<footer class="layout-footer">
+  <div class="content-container">
+    <app-footer></app-footer>
+  </div>

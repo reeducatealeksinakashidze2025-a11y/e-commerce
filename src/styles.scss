@@ -1,0 +1,15 @@
+@use './styles/_variables.scss' as *;
+@use './styles/_typography.scss' as *;
+@use './styles/_mixins.scss' as *;
+
+html, body {
+  font-family: $font-sans;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 0 16px;
+}
