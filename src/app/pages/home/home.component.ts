@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ProductsService } from '../../rest-api/products/products.service';
+import { Products } from '../../shared/models/product/products.model';
 // import { Blog } from '../../shared/models/blog/blog.model';
 
 @Component({
@@ -9,27 +11,27 @@ import { Router } from '@angular/router';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
-  // blogs: Blog[] = [];
+   product: Products[] = [];
 
   constructor(
-    // private blogService: BlogService,
+    private productsService: ProductsService,
      private router: Router) {}
 
   ngOnInit() {
-    // this.loadLatestBlogs();
+    this.loadLatestProducts();
   }
 
-  // loadLatestBlogs() {
-  //   this.blogService.getAll().subscribe(res => {
-  //     this.blogs = (res.value?.items || [])
-  //      .sort((a, b) => {
-  //   const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
-  //   const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
-  //   return dateB - dateA;
-  // })
-  //       .slice(0, 10);
-  //   });
-  // }
+  loadLatestProducts() {
+    this.productsService.findAll().subscribe(res => {
+      this.product = (res.value?.items || [])
+       .sort((a, b) => {
+    const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+    const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+    return dateB - dateA;
+  })
+        .slice(0, 10);
+    });
+  }
 
   // goToBlog(blogId: string) {
   //   this.router.navigate(['/blog', blogId]);

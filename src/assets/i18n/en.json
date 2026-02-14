@@ -1,6 +1,9 @@
 {
   "HOME": {
-    "TITLE": "Home"
+    "TITLE": "Home",
+    "HEADERTITLE":  "Hello! This is our blogging platform",
+       "HEADERTITLEINFO":  "Read the latest blogs and create your own personal stories",
+"LASTBLOGS":"Last Blogs"
   },
    "BLOG": {
     "TITLE": "Blog"

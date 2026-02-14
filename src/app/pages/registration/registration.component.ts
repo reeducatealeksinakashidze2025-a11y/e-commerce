@@ -10,11 +10,10 @@ import { NgForm } from '@angular/forms';
   styleUrl: './registration.component.scss',
 })
 export class RegistrationComponent {
-fullName: string = '';
- 
-  birthDate: string = '';
+  fullName: string = '';
+  birthDate: string | null = null;
   gender: string = '';
-  username: string = '';
+  userName: string = '';
   email: string = '';
   password: string = '';
   errorMessage: string | null = null;
@@ -38,22 +37,24 @@ fullName: string = '';
       this.errorMessage = 'Passwords do not match!';
       return;
     }
-    this.errorMessage=null;
+    this.errorMessage = null;
     const user = {
       fullName: this.fullName,
       birthDate: this.birthDate,
-      gender: Number(this.gender),
-      userName: this.username,
+      gender: this.gender,
+      userName: this.userName,
       password: this.password,
-      email:this.email
+      email: this.email
     };
 
     this.authService.register(user).subscribe(
       (res) => {
+        debugger
         alert(res.message)
         this.router.navigate(['auth/login']);
       },
       (error) => {
+         debugger
         this.errorMessage = error.error?.message || 'Registration failed. Please try again.';
       }
     );

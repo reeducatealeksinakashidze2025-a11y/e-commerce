@@ -4,6 +4,7 @@ import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { LoadingSpinnerComponent } from "./components/loading-spinner/loading-spinner.component";
 import { PaginationComponent } from "./components/pagination/pagination.component";
+import { ProductCard } from './components/product-card/product-card';
 
 
 
@@ -12,7 +13,8 @@ import { PaginationComponent } from "./components/pagination/pagination.componen
   declarations: [
    
     LoadingSpinnerComponent,
-    PaginationComponent
+    PaginationComponent,
+    ProductCard,
   ],
   imports: [
     CommonModule,
@@ -22,7 +24,8 @@ import { PaginationComponent } from "./components/pagination/pagination.componen
   exports: [
    
 LoadingSpinnerComponent,
-    PaginationComponent
+    PaginationComponent,
+     ProductCard
 
   ]
 })

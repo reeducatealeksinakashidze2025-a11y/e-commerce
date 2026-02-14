@@ -29,9 +29,11 @@ export class LoginComponent {
       }
       this.authService.login(this.email, this.password)
         .subscribe(response => {
+          debugger
           this.router.navigate(['app']);
           // ავტორიზაციის წარმატების შემთხვევაში
         }, error => {
+          debugger
           // აქ შეგიძლია წაიღო error-ის ტექსტი
         if (error.status === 401) {
           this.loginError = 'მომხმარებლის სახელი ან პაროლი არასწორია.';
