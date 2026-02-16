@@ -12,6 +12,7 @@ import { LoadingInterceptor } from './core/interceptors/loading/loading-intercep
 import { CoreModule } from './core/core-module';
 import { FormsModule } from '@angular/forms';
 import { PagesModule } from './pages/pages-module';
+import { CabinetModule } from './pages/cabinet/cabinet-module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { PagesModule } from './pages/pages-module';
     SharedModule,
     CoreModule,
     FormsModule,
-    PagesModule
+    PagesModule,
+    CabinetModule
 
   ],
   providers: [

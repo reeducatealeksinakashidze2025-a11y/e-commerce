@@ -1,0 +1,156 @@
+<!-- product-detail.component.html -->
+<div class="container mt-4">
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="text-center py-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">{{ 'common.loading' | translate }}</span>
+    </div>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage && !isLoading" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Product Content -->
+  <div *ngIf="product && !isLoading">
+    <!-- Header with Actions -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2>{{ product.name }}</h2>
+      <div class="btn-group gap-2">
+        <button 
+          class="btn btn-outline-secondary"
+          (click)="goBack()">
+          <i class="fas fa-arrow-left"></i>
+          {{ 'product.buttons.back' | translate }}
+        </button>
+        <button 
+          class="btn btn-primary"
+          (click)="editProduct()"
+          [disabled]="isDeleting">
+          <i class="fas fa-edit"></i>
+          {{ 'product.buttons.edit' | translate }}
+        </button>
+        <button 
+          class="btn btn-danger"
+          (click)="deleteProduct()"
+          [disabled]="isDeleting">
+          <span *ngIf="isDeleting" class="spinner-border spinner-border-sm me-2"></span>
+          <i *ngIf="!isDeleting" class="fas fa-trash"></i>
+          {{ 'product.buttons.delete' | translate }}
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Image Slider -->
+      <div class="col-md-6">
+        <div class="image-slider-container">
+          <!-- Main Image -->
+          <div class="main-image-wrapper" *ngIf="product.images?.length > 0">
+            <img 
+              [src]="product.images[currentImageIndex]" 
+              [alt]="product.name"
+              class="main-image">
+            
+            <!-- Navigation Arrows -->
+            <button 
+              *ngIf="product.images.length > 1"
+              class="slider-btn prev-btn" 
+              (click)="previousImage()">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button 
+              *ngIf="product.images.length > 1"
+              class="slider-btn next-btn" 
+              (click)="nextImage()">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+
+            <!-- Image Counter -->
+            <div class="image-counter" *ngIf="product.images.length > 1">
+              {{ currentImageIndex + 1 }} / {{ product.images.length }}
+            </div>
+          </div>
+
+          <!-- No Image Placeholder -->
+          <div class="no-image-placeholder" *ngIf="!product.images?.length">
+            <i class="fas fa-image fa-5x text-muted"></i>
+            <p class="mt-3 text-muted">{{ 'product.noImage' | translate }}</p>
+          </div>
+
+          <!-- Thumbnail Navigation -->
+          <div class="thumbnails-wrapper" *ngIf="product.images?.length > 1">
+            <div class="thumbnails">
+              <div 
+                *ngFor="let image of product.images; let i = index"
+                class="thumbnail"
+                [class.active]="i === currentImageIndex"
+                (click)="selectImage(i)">
+                <img [src]="image" [alt]="product.name + ' - ' + (i + 1)">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Details -->
+      <div class="col-md-6">
+        <div class="product-details">
+          <!-- Price and Discount -->
+          <div class="price-section mb-4">
+            <div class="price">{{ product.price | currency:'GEL':'symbol':'1.2-2' }}</div>
+            <span *ngIf="product.isDiscounted" class="badge bg-success ms-3">
+              <i class="fas fa-tag"></i>
+              {{ 'product.discounted' | translate }}
+            </span>
+          </div>
+
+          <!-- Details Grid -->
+          <div class="details-grid">
+            <div class="detail-item">
+              <div class="detail-label">
+                <i class="fas fa-tag me-2"></i>
+                {{ 'product.category.label' | translate }}
+              </div>
+              <div class="detail-value">{{ getCategoryName() }}</div>
+            </div>
+
+            <div class="detail-item">
+              <div class="detail-label">
+                <i class="fas fa-boxes me-2"></i>
+                {{ 'product.fields.quantity' | translate }}
+              </div>
+              <div class="detail-value">{{ product.quantity }}</div>
+            </div>
+
+            <div class="detail-item" *ngIf="product.description">
+              <div class="detail-label">
+                <i class="fas fa-align-left me-2"></i>
+                {{ 'product.fields.description' | translate }}
+              </div>
+              <div class="detail-value description">{{ product.description }}</div>
+            </div>
+
+            <!-- Created/Updated Info -->
+            <div class="detail-item" *ngIf="product.createdAt">
+              <div class="detail-label">
+                <i class="fas fa-calendar me-2"></i>
+                {{ 'product.createdAt' | translate }}
+              </div>
+              <div class="detail-value">{{ product.createdAt | date:'medium' }}</div>
+            </div>
+
+            <div class="detail-item" *ngIf="product.updatedAt">
+              <div class="detail-label">
+                <i class="fas fa-clock me-2"></i>
+                {{ 'product.updatedAt' | translate }}
+              </div>
+              <div class="detail-value">{{ product.updatedAt | date:'medium' }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

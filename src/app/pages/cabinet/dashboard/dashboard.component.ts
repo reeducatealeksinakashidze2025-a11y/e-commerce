@@ -1,66 +1,117 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ResponseBase } from '../../../shared/models/base/response-base.model';
-import { debounceTime, distinctUntilChanged, Subject, Subscription } from 'rxjs';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { PagedResult } from '../../../shared/models/base/paged-result.model';
+// products-dashboard.component.ts
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ProductsService } from '../../../rest-api/products/products.service';
 
 @Component({
   selector: 'app-dashboard',
-  standalone: false,
+  standalone: false,  
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss',
+  styleUrls: ['./dashboard.component.scss']
 })
-
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit {
+  products: any[] = [];
   searchTerm: string = '';
-  // blogs: Blog[] = [];
-  page = 1;
-  pageSize = 5;
-  totalCount = 0;
+  
+  // Pagination
+  page: number = 1;
+  pageSize: number = 10;
+  totalCount: number = 0;
 
-  private searchSubject: Subject<string> = new Subject<string>();
-  private searchSubscription!: Subscription;
+  // Filters
+  selectedCategory: number | null = null;
+  priceFrom: number | null = null;
+  priceTo: number | null = null;
+  isDiscounted: boolean | null = null;
+
+  isLoading: boolean = false;
+  errorMessage: string = '';
 
   constructor(
-    // private blogService: BlogService,
-     private sanitizer: DomSanitizer) { }
+    private productService: ProductsService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    // subscribe search input with debounce
-    this.searchSubscription = this.searchSubject
-      .pipe(
-        debounceTime(2000),        // 500ms დაელოდება შეჩერებას
-        distinctUntilChanged()    // იგივე ტექსტისთვის არ გაიშვას მეორე მოთხოვნა
-      )
-      .subscribe((searchText: string) => {
-        this.loadBlogs(searchText);
-      });
+    this.loadProducts();
+  }
 
-    // αρχική φόρτωση ბლოგები
-    this.loadBlogs('');
+  loadProducts(): void {
+    this.isLoading = true;
+    
+    const params: any = {
+      page: this.page,
+      take: this.pageSize,
+    };
+
+    if (this.searchTerm) {
+      params.search = this.searchTerm;
+    }
+    
+    if (this.selectedCategory) {
+      params.category = this.selectedCategory;
+    }
+    
+    if (this.priceFrom !== null) {
+      params.priceFrom = this.priceFrom;
+    }
+    
+    if (this.priceTo !== null) {
+      params.priceTo = this.priceTo;
+    }
+    
+    if (this.isDiscounted !== null) {
+      params.isActive = this.isDiscounted;
+    }
+
+    this.productService.findAll(params).subscribe({
+      next: (response: any) => {
+        this.products = response.data || response;
+        this.totalCount = response.totalCount || response.length;
+        this.isLoading = false;
+      },
+      error: (error: any) => {
+        console.error('Error loading products:', error);
+        this.errorMessage = 'პროდუქტების ჩატვირთვა ვერ მოხერხდა';
+        this.isLoading = false;
+      }
+    });
   }
 
   onSearch(): void {
-    this.searchSubject.next(this.searchTerm);
+    this.page = 1; // Reset to first page on search
+    this.loadProducts();
   }
 
-  loadBlogs(search: string): void {
-    // this.blogService.getAll(this.page, this.pageSize, search).subscribe({
-    //   next: (data) => {
-    //     this.blogs = data.value?.items || [];
-    //     this.totalCount = data.value?.totalCount || 0;
-    //   },
-    //   error: (err) => {
-    //     console.error('Error loading blogs:', err);
-    //   }
-    // });
-  }
-
-  ngOnDestroy(): void {
-    this.searchSubscription.unsubscribe();
-  }
-  onPageChange(newPage: number) {
+  onPageChange(newPage: number): void {
     this.page = newPage;
-    this.loadBlogs(this.searchTerm);
+    this.loadProducts();
+  }
+
+  onFilterChange(): void {
+    this.page = 1; // Reset to first page on filter change
+    this.loadProducts();
+  }
+
+  viewProduct(id: string): void {
+    this.router.navigate(['/products', id]);
+  }
+
+  editProduct(id: string): void {
+    this.router.navigate(['/products', id, 'edit']);
+  }
+
+  createProduct(): void {
+    this.router.navigate(['/products/new']);
+  }
+
+  clearFilters(): void {
+    this.searchTerm = '';
+    this.selectedCategory = null;
+    this.priceFrom = null;
+    this.priceTo = null;
+    this.isDiscounted = null;
+    this.page = 1;
+    this.loadProducts();
   }
 }

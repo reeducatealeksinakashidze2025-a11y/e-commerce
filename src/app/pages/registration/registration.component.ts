@@ -49,12 +49,10 @@ export class RegistrationComponent {
 
     this.authService.register(user).subscribe(
       (res) => {
-        debugger
         alert(res.message)
         this.router.navigate(['auth/login']);
       },
       (error) => {
-         debugger
         this.errorMessage = error.error?.message || 'Registration failed. Please try again.';
       }
     );

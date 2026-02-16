@@ -17,23 +17,21 @@ export class LoginComponent {
     private router: Router) { }
     ngOnInit(): void {
       if (this.authService.isLoggedIn()) {
-        this.router.navigate(['app']);;
+        this.router.navigate(['/cabinet']);;
       }
     }
 
 
    onSubmit() {
-       this.loginError = '';
+       //this.loginError = '';
       if (this.authService.isLoggedIn()) {
-        this.router.navigate(['app']);;
+        this.router.navigate(['/cabinet']);;
       }
       this.authService.login(this.email, this.password)
         .subscribe(response => {
-          debugger
-          this.router.navigate(['app']);
+          this.router.navigate(['/cabinet']);
           // ავტორიზაციის წარმატების შემთხვევაში
         }, error => {
-          debugger
           // აქ შეგიძლია წაიღო error-ის ტექსტი
         if (error.status === 401) {
           this.loginError = 'მომხმარებლის სახელი ან პაროლი არასწორია.';

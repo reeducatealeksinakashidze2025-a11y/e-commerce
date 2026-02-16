@@ -3,6 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LayoutComponent } from './shared/layout/layout.component';
+import { ProductAddComponent } from './product/product-add/product-add.component';
+import { ProductComponent } from './product/product.component';
+import { ProductDetailComponent } from './product/product-detail/product-detail.component';
+import { ProductEditComponent } from './product/product-edit/product-edit.component';
 
 
 
@@ -23,12 +27,16 @@ import { LayoutComponent } from './shared/layout/layout.component';
 
 const routes: Routes = [
   {
-    path: 'app',
+    path: '',
     component: LayoutComponent,
   //  canActivate: [authGuard],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
+      { path: 'products', component: ProductComponent },
+      { path: 'products/new', component: ProductAddComponent },
+      { path: 'products/:id', component: ProductDetailComponent },
+      { path: 'products/:id/edit', component: ProductEditComponent },
       { path: 'profile', component: ProfileComponent },
       { path: '**', redirectTo: 'dashboard' },
     ],

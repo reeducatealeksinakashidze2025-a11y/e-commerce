@@ -1,0 +1,111 @@
+<div [formGroup]="productForm">
+  <!-- Name -->
+  <div class="mb-3">
+    <label for="name" class="form-label">
+      {{ 'product.fields.name' | translate }} *
+    </label>
+    <input 
+      type="text" 
+      id="name"
+      class="form-control"
+      [class.is-invalid]="isFieldInvalid('name')"
+      formControlName="name"
+      [placeholder]="'product.fields.name' | translate"
+    >
+    <div *ngIf="isFieldInvalid('name')" class="invalid-feedback">
+      {{ getErrorMessage('name') }}
+    </div>
+  </div>
+
+  <!-- Category -->
+  <div class="mb-3">
+    <label for="category" class="form-label">
+      {{ 'product.category.label' | translate }} *
+    </label>
+    <select 
+      id="category"
+      class="form-control"
+      [class.is-invalid]="isFieldInvalid('category')"
+      formControlName="category"
+    >
+      <option value="">{{ 'product.category.placeholder' | translate }}</option>
+      <option *ngFor="let cat of categories" [value]="cat.value">
+        {{ cat.label }}
+      </option>
+    </select>
+    <div *ngIf="isFieldInvalid('category')" class="invalid-feedback">
+      {{ getErrorMessage('category') }}
+    </div>
+  </div>
+
+  <!-- Description -->
+  <div class="mb-3">
+    <label for="description" class="form-label">
+      {{ 'product.fields.description' | translate }}
+    </label>
+    <textarea 
+      id="description"
+      class="form-control"
+      formControlName="description"
+      rows="4"
+      [placeholder]="('product.fields.description' | translate) + '...'"
+    ></textarea>
+  </div>
+
+  <!-- Quantity and Price Row -->
+  <div class="row">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="quantity" class="form-label">
+          {{ 'product.fields.quantity' | translate }} *
+        </label>
+        <input 
+          type="number" 
+          id="quantity"
+          class="form-control"
+          [class.is-invalid]="isFieldInvalid('quantity')"
+          formControlName="quantity"
+          min="1"
+        >
+        <div *ngIf="isFieldInvalid('quantity')" class="invalid-feedback">
+          {{ getErrorMessage('quantity') }}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="price" class="form-label">
+          {{ 'product.fields.price' | translate }} (₾) *
+        </label>
+        <input 
+          type="number" 
+          id="price"
+          class="form-control"
+          [class.is-invalid]="isFieldInvalid('price')"
+          formControlName="price"
+          min="0"
+          step="0.01"
+        >
+        <div *ngIf="isFieldInvalid('price')" class="invalid-feedback">
+          {{ getErrorMessage('price') }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Discount Checkbox -->
+  <!-- <div class="mb-3">
+    <div class="form-check">
+      <input 
+        type="checkbox" 
+        class="form-check-input" 
+        id="isDiscounted"
+        formControlName="isDiscounted"
+      >
+      <label class="form-check-label" for="isDiscounted">
+        {{ 'product.fields.isDiscounted' | translate }}
+      </label>
+    </div>
+  </div> -->
+</div>

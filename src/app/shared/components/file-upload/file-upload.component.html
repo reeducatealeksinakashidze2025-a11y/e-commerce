@@ -1,0 +1,87 @@
+<!-- file-upload.component.html -->
+<div class="file-upload-container">
+  <div class="mb-3">
+    <label class="form-label">
+      {{ 'product.fields.images' | translate }} 
+      ({{ 'product.maxImages' | translate }}: {{ maxFiles }})
+    </label>
+    <div class="custom-file-input-wrapper">
+      <input 
+        type="file" 
+        class="form-control" 
+        id="images"
+        (change)="onFileSelected($event)"
+        [accept]="acceptedTypes"
+        multiple
+        [disabled]="getFileCount() >= maxFiles"
+      >
+      <label for="images" class="upload-label">
+        <i class="fas fa-cloud-upload-alt"></i>
+        <span *ngIf="getFileCount() < maxFiles">
+          {{ 'product.uploadImages' | translate }}
+        </span>
+        <span *ngIf="getFileCount() >= maxFiles">
+          {{ 'product.maxImagesReached' | translate }}
+        </span>
+      </label>
+    </div>
+    <small class="form-text text-muted">
+      {{ 'product.imageUploadHint' | translate: {size: maxFileSize / (1024 * 1024)} }}
+      ({{ 'product.selected' | translate }}: {{ getFileCount() }}/{{ maxFiles }})
+    </small>
+  </div>
+
+  <!-- Existing Images (for Edit) -->
+  <div *ngIf="existingImages.length > 0" class="existing-images mb-4">
+    <h6 class="section-title">
+      <i class="fas fa-images me-2"></i>
+      {{ 'product.existingImages' | translate }}
+    </h6>
+    <div class="row g-3">
+      <div 
+        *ngFor="let imageUrl of existingImages; let i = index" 
+        class="col-md-3 col-sm-6">
+        <div class="image-preview existing">
+          <img [src]="imageUrl" alt="Existing image" class="img-thumbnail">
+          <button 
+            type="button" 
+            class="btn btn-danger btn-sm remove-btn"
+            (click)="removeExistingImage(i)"
+            title="{{ 'product.removeImage' | translate }}">
+            <i class="fas fa-times"></i>
+          </button>
+          <span class="badge bg-info">
+            {{ 'product.existing' | translate }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Image Previews -->
+  <div *ngIf="previewUrls.length > 0" class="new-images">
+    <h6 class="section-title" *ngIf="existingImages.length > 0">
+      <i class="fas fa-images me-2"></i>
+      {{ 'product.newImages' | translate }}
+    </h6>
+    <div class="row g-3">
+      <div 
+        *ngFor="let url of previewUrls; let i = index" 
+        class="col-md-3 col-sm-6">
+        <div class="image-preview new">
+          <img [src]="url" alt="Preview" class="img-thumbnail">
+          <button 
+            type="button" 
+            class="btn btn-danger btn-sm remove-btn"
+            (click)="removeNewImage(i)"
+            title="{{ 'product.removeImage' | translate }}">
+            <i class="fas fa-times"></i>
+          </button>
+          <span class="badge bg-success">
+            {{ 'product.new' | translate }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,101 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>{{ 'product.list.title' | translate }}</h2>
+    <button class="btn btn-success" (click)="add()">
+      <i class="fas fa-plus"></i> {{ 'product.buttons.add' | translate }}
+    </button>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="text-center py-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">{{ 'common.loading' | translate }}</span>
+    </div>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage && !isLoading" class="alert alert-danger alert-dismissible fade show">
+    {{ errorMessage }}
+    <button type="button" class="btn-close" (click)="errorMessage = ''" aria-label="Close"></button>
+  </div>
+
+  <!-- Products List -->
+  <div *ngIf="!isLoading">
+    <div *ngFor="let product of products" class="card p-3 mb-3 product-card">
+      <div class="row">
+        <!-- Product Image -->
+        <div class="col-md-3">
+          <div class="product-image-wrapper">
+            <img 
+              [src]="getMainImage(product)" 
+              [alt]="product.name"
+              class="product-image"
+              (click)="view(product._id)"
+            >
+            <span *ngIf="product.isDiscounted" class="discount-badge">
+              <i class="fas fa-tag"></i> {{ 'product.discounted' | translate }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Product Details -->
+        <div class="col-md-9">
+          <div class="d-flex justify-content-between align-items-start">
+            <div class="flex-grow-1">
+              <div class="d-flex align-items-center mb-2">
+                <h3 class="mb-0 me-3" (click)="view(product._id)" style="cursor: pointer;">
+                  {{ product.name }}
+                </h3>
+                <span class="badge bg-secondary">
+                  {{ getCategoryName(product.category) }}
+                </span>
+              </div>
+
+              <div class="product-description clamp-2" *ngIf="product.description">
+                {{ product.description }}
+              </div>
+
+              <div class="product-meta mt-2">
+                <span class="me-3">
+                  <i class="fas fa-boxes text-muted"></i>
+                  <strong>{{ 'product.fields.quantity' | translate }}:</strong> {{ product.quantity }}
+                </span>
+                <span class="product-price">
+                  <i class="fas fa-lari-sign text-success"></i>
+                  <strong>{{ product.price | currency:'GEL':'symbol':'1.2-2' }}</strong>
+                </span>
+              </div>
+
+              <p class="text-muted small mb-0 mt-2">
+                <i class="fas fa-calendar"></i>
+                {{ product.createdAt | date:'short' }}
+              </p>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="mt-3 d-flex gap-2">
+            <button class="btn btn-outline-primary btn-sm" (click)="view(product._id)">
+              <i class="fas fa-eye"></i> {{ 'product.buttons.view' | translate }}
+            </button>
+            <button class="btn btn-primary btn-sm" (click)="edit(product._id)">
+              <i class="fas fa-edit"></i> {{ 'product.buttons.edit' | translate }}
+            </button>
+            <button class="btn btn-danger btn-sm" (click)="delete(product._id)">
+              <i class="fas fa-trash"></i> {{ 'product.buttons.delete' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- No Products -->
+    <div *ngIf="products.length === 0 && !isLoading" class="text-center py-5">
+      <i class="fas fa-box-open fa-4x text-muted mb-3"></i>
+      <p class="text-muted">{{ 'product.noProducts' | translate }}</p>
+      <button class="btn btn-primary" (click)="add()">
+        <i class="fas fa-plus"></i> დამატება
+      </button>
+    </div>
+  </div>
+</div>

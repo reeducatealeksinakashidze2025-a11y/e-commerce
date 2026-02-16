@@ -1,0 +1,143 @@
+/* file-upload.component.css */
+.file-upload-container {
+  margin-bottom: 1.5rem;
+}
+
+.custom-file-input-wrapper {
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.custom-file-input-wrapper input[type="file"] {
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.custom-file-input-wrapper input[type="file"]:disabled {
+  cursor: not-allowed;
+}
+
+.upload-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 2rem;
+  border: 2px dashed #dee2e6;
+  border-radius: 8px;
+  background: #f8f9fa;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin: 0;
+}
+
+.upload-label:hover {
+  border-color: #007bff;
+  background: #e7f1ff;
+}
+
+.custom-file-input-wrapper input[type="file"]:disabled + .upload-label {
+  cursor: not-allowed;
+  background: #e9ecef;
+  opacity: 0.7;
+}
+
+.upload-label i {
+  font-size: 2rem;
+  color: #007bff;
+}
+
+.section-title {
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #495057;
+  display: flex;
+  align-items: center;
+}
+
+.existing-images,
+.new-images {
+  margin-bottom: 1.5rem;
+}
+
+.image-preview {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+}
+
+.image-preview:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.image-preview.existing {
+  border: 2px solid #17a2b8;
+}
+
+.image-preview.new {
+  border: 2px solid #28a745;
+}
+
+.image-preview img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.remove-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  z-index: 10;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.image-preview:hover .remove-btn {
+  opacity: 1;
+}
+
+.badge {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0.5rem;
+  font-size: 0.7rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.form-text {
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.g-3 {
+  --bs-gutter-x: 1rem;
+  --bs-gutter-y: 1rem;
+}
+
+@media (max-width: 768px) {
+  .image-preview img {
+    height: 150px;
+  }
+  
+  .upload-label {
+    padding: 1.5rem;
+  }
+  
+  .upload-label i {
+    font-size: 1.5rem;
+  }
+}

@@ -14,7 +14,7 @@ export class ProductsService {
   constructor(private http: HttpClient) {}
 
   // Create
-  create(product: ProductViewModel): Observable<ResponseBase<ProductViewModel>> {
+  create(product: FormData): Observable<ResponseBase<ProductViewModel>> {
     return this.http.post<ResponseBase<ProductViewModel>>(this.apiUrl, product);
   }
 
@@ -29,7 +29,7 @@ export class ProductsService {
   }
 
   // Update
-  update(id: string, product: Partial<ProductViewModel>): Observable<ResponseBase<ProductViewModel>> {
+  update(id: string, product: FormData): Observable<ResponseBase<ProductViewModel>> {
     return this.http.patch<ResponseBase<ProductViewModel>>(`${this.apiUrl}/${id}`, product);
   }
 

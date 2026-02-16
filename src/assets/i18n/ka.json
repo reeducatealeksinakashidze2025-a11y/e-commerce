@@ -42,5 +42,73 @@
       }
  
     
+  },
+  "product": {
+    "titles": {
+      "create": "ახალი პროდუქტი",
+      "edit": "პროდუქტის რედაქტირება",
+      "detail": "პროდუქტის დეტალები"
+    },
+    "buttons": {
+      "save": "შენახვა",
+      "update": "განახლება",
+      "cancel": "გაუქმება",
+      "back": "უკან",
+      "edit": "რედაქტირება",
+      "delete": "წაშლა",
+      "view": "ნახვა",
+      "create": "დამატება"
+    },
+    "fields": {
+      "name": "პროდუქტის სახელი",
+      "description": "აღწერა",
+      "quantity": "რაოდენობა",
+      "price": "ფასი",
+      "isDiscounted": "ფასდაკლებული",
+      "images": "სურათები"
+    },
+    "category": {
+      "label": "კატეგორია",
+      "placeholder": "აირჩიეთ კატეგორია",
+      "ELECTRONICS": "ელექტრონიკა",
+      "CLOTHING": "ტანსაცმელი",
+      "FURNITURE": "ავეჯი",
+      "GROCERIES": "სასურსათო",
+      "BOOKS": "წიგნები",
+      "ENTERTAINMENT": "გასართობი",
+      "TRANSPORT": "ტრანსპორტი",
+      "UTILITIES": "კომუნალური",
+      "DINING": "კვება",
+      "OTHER": "სხვა"
+    },
+    "discounted": "ფასდაკლება",
+    "noImage": "სურათი არ არის",
+    "createdAt": "შექმნის თარიღი",
+    "updatedAt": "განახლების თარიღი",
+    "errors": {
+      "loadFailed": "პროდუქტის ჩატვირთვა ვერ მოხერხდა",
+      "createFailed": "პროდუქტის შექმნა ვერ მოხერხდა",
+      "updateFailed": "პროდუქტის განახლება ვერ მოხერხდა",
+      "deleteFailed": "პროდუქტის წაშლა ვერ მოხერხდა"
+    },
+    "confirmDelete": "დარწმუნებული ხართ, რომ გსურთ ამ პროდუქტის წაშლა?",
+    "search": {
+      "placeholder": "ძებნა სახელით..."
+    },
+    "filters": {
+      "allCategories": "ყველა კატეგორია",
+      "allProducts": "ყველა პროდუქტი",
+      "discounted": "ფასდაკლებული",
+      "regular": "რეგულარული",
+      "priceFrom": "ფასი დან",
+      "priceTo": "ფასი მდე",
+      "clear": "ფილტრების გასუფთავება"
+    },
+    "noProducts": "პროდუქტები ვერ მოიძებნა"
+  },
+  "common": {
+    "yes": "კი",
+    "no": "არა",
+    "loading": "იტვირთება..."
   }
 }

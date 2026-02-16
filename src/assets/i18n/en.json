@@ -41,6 +41,39 @@
       }
  
     
+  },
+  "product": {
+    "category": {
+      "label": "Category",
+      "placeholder": "Select category",
+      "ELECTRONICS": "Electronics",
+      "CLOTHING": "Clothing",
+      "FURNITURE": "Furniture",
+      "GROCERIES": "Groceries",
+      "BOOKS": "Books",
+      "ENTERTAINMENT": "Entertainment",
+      "TRANSPORT": "Transport",
+      "UTILITIES": "Utilities",
+      "DINING": "Dining",
+      "OTHER": "Other"
+    },
+    "fields": {
+      "name": "Product Name",
+      "description": "Description",
+      "quantity": "Quantity",
+      "price": "Price",
+      "isDiscounted": "Discounted Product"
+    },
+    "validation": {
+      "required": "This field is required",
+      "minValue": "Minimum value: {{min}}",
+      "minLength": "Minimum length: {{length}}"
+    },
+    "buttons": {
+      "save": "Save",
+      "update": "Update",
+      "cancel": "Cancel"
+    }
   }
   
 }

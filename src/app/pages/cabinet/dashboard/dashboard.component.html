@@ -1,54 +1,127 @@
-<!-- <div class="dashboard">
-  <h2>ბლოგები</h2>
+<!-- products-dashboard.component.html -->
+<div class="dashboard">
+  <div class="dashboard-header">
+    <h2>{{ 'product.list.title' | translate }}</h2>
+    <button class="btn btn-primary" (click)="createProduct()">
+      <i class="fas fa-plus"></i>
+      {{ 'product.buttons.create' | translate }}
+    </button>
+  </div>
 
-  <input
-    type="text"
-    placeholder="ძებნა სათაურით..."
-    [(ngModel)]="searchTerm"
-    (input)="onSearch()"
-    class="search-input"
-  />
+  <!-- Search and Filters -->
+  <div class="filters-section">
+    <div class="row">
+      <!-- Search -->
+      <div class="col-md-4">
+        <input
+          type="text"
+          class="form-control search-input"
+          [placeholder]="'product.search.placeholder' | translate"
+          [(ngModel)]="searchTerm"
+          (input)="onSearch()"
+        />
+      </div>
 
-  <div *ngIf="blogs.length; else noBlogs">
-    <div *ngFor="let blog of blogs" class="blog-card">
-      <h3>{{ blog.title }}</h3>
-  <p [innerHTML]="sanitizeHtml(blog.contentHtml)"></p>
-       <small>ავტორი: {{ blog.author?.fullName || 'უცნობი' }}</small>
-      <hr>
+      <!-- Category Filter -->
+      <div class="col-md-2">
+        <select 
+          class="form-control" 
+          [(ngModel)]="selectedCategory"
+          (change)="onFilterChange()">
+          <option [ngValue]="null">{{ 'product.filters.allCategories' | translate }}</option>
+          <option [value]="1">{{ 'product.category.ELECTRONICS' | translate }}</option>
+          <option [value]="2">{{ 'product.category.CLOTHING' | translate }}</option>
+          <option [value]="3">{{ 'product.category.FURNITURE' | translate }}</option>
+          <option [value]="4">{{ 'product.category.GROCERIES' | translate }}</option>
+          <option [value]="5">{{ 'product.category.BOOKS' | translate }}</option>
+          <option [value]="6">{{ 'product.category.ENTERTAINMENT' | translate }}</option>
+          <option [value]="7">{{ 'product.category.TRANSPORT' | translate }}</option>
+          <option [value]="8">{{ 'product.category.UTILITIES' | translate }}</option>
+          <option [value]="9">{{ 'product.category.DINING' | translate }}</option>
+          <option [value]="10">{{ 'product.category.OTHER' | translate }}</option>
+        </select>
+      </div>
+
+      <!-- Price From -->
+      <div class="col-md-2">
+        <input
+          type="number"
+          class="form-control"
+          [placeholder]="'product.filters.priceFrom' | translate"
+          [(ngModel)]="priceFrom"
+          (change)="onFilterChange()"
+          min="0"
+        />
+      </div>
+
+      <!-- Price To -->
+      <div class="col-md-2">
+        <input
+          type="number"
+          class="form-control"
+          [placeholder]="'product.filters.priceTo' | translate"
+          [(ngModel)]="priceTo"
+          (change)="onFilterChange()"
+          min="0"
+        />
+      </div>
+
+      <!-- Discounted Filter -->
+      <div class="col-md-2">
+        <select 
+          class="form-control" 
+          [(ngModel)]="isDiscounted"
+          (change)="onFilterChange()">
+          <option [ngValue]="null">{{ 'product.filters.allProducts' | translate }}</option>
+          <option [ngValue]="true">{{ 'product.filters.discounted' | translate }}</option>
+          <option [ngValue]="false">{{ 'product.filters.regular' | translate }}</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Clear Filters Button -->
+    <div class="mt-3" *ngIf="searchTerm || selectedCategory || priceFrom || priceTo || isDiscounted !== null">
+      <button class="btn btn-secondary btn-sm" (click)="clearFilters()">
+        <i class="fas fa-times"></i>
+        {{ 'product.filters.clear' | translate }}
+      </button>
     </div>
   </div>
 
-  <ng-template #noBlogs>
-    <p>ბლოგები ვერ მოიძებნა.</p>
-  </ng-template>
-</div>
- -->
-<div class="dashboard">
-  <h2>ბლოგები</h2>
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="text-center py-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">{{ 'common.loading' | translate }}</span>
+    </div>
+  </div>
 
-  <input
-    type="text"
-    placeholder="ძებნა სათაურით..."
-    [(ngModel)]="searchTerm"
-    (input)="onSearch()"
-    class="search-input"
-  />
+  <!-- Error Message -->
+  <div *ngIf="errorMessage && !isLoading" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
 
-  <!-- <div *ngIf="blogs.length; else noBlogs">
-    <app-blog-card
-      *ngFor="let blog of blogs"
-      [blog]="blog"
-    ></app-blog-card>
-  </div> -->
-    <app-pagination
+  <!-- Products Grid -->
+  <div *ngIf="!isLoading && products.length > 0" class="products-grid">
+    <app-product-card
+      *ngFor="let product of products"
+      [product]="product"
+      (view)="viewProduct($event)"
+      (edit)="editProduct($event)">
+    </app-product-card>
+  </div>
+
+  <!-- No Products -->
+  <div *ngIf="!isLoading && products.length === 0" class="no-products">
+    <i class="fas fa-box-open fa-5x text-muted mb-3"></i>
+    <p>{{ 'product.noProducts' | translate }}</p>
+  </div>
+
+  <!-- Pagination -->
+  <app-pagination
+    *ngIf="!isLoading && products.length > 0"
     [page]="page"
     [pageSize]="pageSize"
     [totalCount]="totalCount"
     (pageChange)="onPageChange($event)">
-</app-pagination>
-
-  <ng-template #noBlogs>
-    <p>ბლოგები ვერ მოიძებნა.</p>
-  </ng-template>
+  </app-pagination>
 </div>
-

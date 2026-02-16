@@ -10,3 +10,16 @@ export enum ProductCategory {
   DINING = 9,
   OTHER = 10,
 }
+
+export const PRODUCT_CATEGORIES: ProductCategory[] = [
+  ProductCategory.ELECTRONICS,
+  ProductCategory.CLOTHING,
+  ProductCategory.FURNITURE,
+  ProductCategory.GROCERIES,
+  ProductCategory.BOOKS,
+  ProductCategory.ENTERTAINMENT,
+  ProductCategory.TRANSPORT,
+  ProductCategory.UTILITIES,
+  ProductCategory.DINING,
+  ProductCategory.OTHER,
+];
