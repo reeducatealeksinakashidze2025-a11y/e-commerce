@@ -1,21 +1,23 @@
 <section class="about-section">
   <div class="about-header">
-    <h1>ჩვენი ბლოგების პლატფორმა</h1>
-    <p>
-      აქ შეგიძლია შექმნა შენი ბლოგი, გაუზიარო შენი იდეები, და დაეხმარო სხვებს შენი გამოცდილებით.
-      ასევე შეგიძლია დაუკომენტარო სხვა ბლოგებს და ჩაერთო საინტერესო დისკუსიებში.
-    </p>
+    <h1>{{ 'ABOUT.TITLE' | translate }} - {{ 'ABOUT.SUBTITLE' | translate }}</h1>
+    <p>{{ 'ABOUT.DESCRIPTION' | translate }}</p>
   </div>
 
   <div class="about-actions">
-    <div class="action-card" routerLink="/cabinet/app/blog/add">
-      <h3>დაწერე შენი ბლოგი</h3>
-      <p>დააკონტრიბუციო და გაუზიარე შენი იდეები სხვა მომხმარებლებს.</p>
+    <div class="action-card" routerLink="/cabinet/products">
+      <h3>{{ 'ABOUT.BROWSE_PRODUCTS' | translate }}</h3>
+      <p>{{ 'ABOUT.BROWSE_PRODUCTS_DESC' | translate }}</p>
     </div>
 
-    <div class="action-card" routerLink="/blog">
-      <h3>წაიკითხე სხვა ბლოგები</h3>
-      <p>წაიკითხე სხვა ბლოგები და დაუკომენტარე, გაუზიარე შენი აზრები.</p>
+    <div class="action-card" routerLink="/cabinet/cart">
+      <h3>{{ 'ABOUT.VIEW_CART' | translate }}</h3>
+      <p>{{ 'ABOUT.VIEW_CART_DESC' | translate }}</p>
+    </div>
+
+    <div class="action-card" routerLink="/cabinet/orders">
+      <h3>{{ 'ABOUT.VIEW_ORDERS' | translate }}</h3>
+      <p>{{ 'ABOUT.VIEW_ORDERS_DESC' | translate }}</p>
     </div>
   </div>
 </section>

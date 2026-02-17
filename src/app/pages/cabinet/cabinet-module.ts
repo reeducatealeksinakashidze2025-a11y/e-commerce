@@ -14,6 +14,8 @@ import { ProductAddComponent } from './product/product-add/product-add.component
 import { ProductEditComponent } from './product/product-edit/product-edit.component';
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 import { ProductComponent } from './product/product.component';
+import { CartComponent } from './cart/cart.component';
+import { OrdersComponent } from './orders/orders.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { ProductComponent } from './product/product.component';
     ProductComponent,
     ProductAddComponent,
     ProductEditComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    CartComponent,
+    OrdersComponent
   ],
   imports: [
     CommonModule,

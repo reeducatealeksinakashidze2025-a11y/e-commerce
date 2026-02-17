@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
+import { CloudFrontImagePipe } from './pipes/cloudfront-image.pipe';
 
 
 
@@ -17,7 +18,8 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
     HeaderComponent,
     ThemeToggleComponent,
     AuthLayoutComponent,
-    MainLayoutComponent
+    MainLayoutComponent,
+    CloudFrontImagePipe
   ],
   imports: [
     CommonModule,
@@ -28,7 +30,8 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
    exports: [
     HeaderComponent,
     FooterComponent,
-    ThemeToggleComponent
+    ThemeToggleComponent,
+    CloudFrontImagePipe
   ]
 })
 export class CoreModule { }

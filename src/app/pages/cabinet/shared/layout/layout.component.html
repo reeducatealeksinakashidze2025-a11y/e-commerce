@@ -1,52 +1,54 @@
 <header>
-  <nav class="navbar navbar-expand-md navbar-light bg-light" data-bs-theme="light">
-    <div class="container">
-      <a class="navbar-brand" routerLink="/">Personal Blog</a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" data-bs-theme="light">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/">
+        <strong>e-Commerce</strong>
+      </a>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" routerLink="dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{
-              'CABINET.DASHBOARD.TITLE' | translate }}</a>
+            <a class="nav-link" routerLink="dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+              <i class="bi bi-speedometer2"></i> {{ 'CABINET.DASHBOARD.TITLE' | translate }}
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="my-articles" routerLinkActive="active">{{ 'CABINET.MYARTICLES.TITLE' |
-              translate }}</a>
+            <a class="nav-link" routerLink="products" routerLinkActive="active">
+              <i class="bi bi-box"></i> {{ 'CABINET.PRODUCTS.TITLE' | translate }}
+            </a>
           </li>
-          <!-- <li class="nav-item">
-          <a class="nav-link" routerLink="/about" routerLinkActive="active">{{ 'ABOUT.TITLE' | translate }}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/newsletter" routerLinkActive="active">{{ 'NEWSLETTER.TITLE' | translate
-            }}</a>
-        </li> -->
+          <li class="nav-item">
+            <a class="nav-link" routerLink="cart" routerLinkActive="active">
+              <i class="bi bi-cart"></i> {{ 'CABINET.CART.TITLE' | translate }}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="orders" routerLinkActive="active">
+              <i class="bi bi-bag-check"></i> {{ 'CABINET.ORDERS.TITLE' | translate }}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="profile" routerLinkActive="active">
+              <i class="bi bi-person"></i> {{ 'CABINET.PROFILE.TITLE' | translate }}
+            </a>
+          </li>
         </ul>
       </div>
 
       <div class="d-flex align-items-center gap-3 ms-3">
-        <app-theme-toggle></app-theme-toggle>
-        <!-- Profile dropdown -->
-        <div class="dropdown">
-          <a class="d-flex align-items-center text-decoration-none dropdown-toggle" href="#" id="profileDropdown"
-            role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="../assets/images/profile-avatar.png" alt="Profile" width="32" height="32" class="rounded-circle" />
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-            <li>
-              <a class="dropdown-item" routerLink="profile">{{ 'CABINET.PROFILE.TITLE' | translate }}</a>
-            </li>
-            <li>
-              <hr class="dropdown-divider" />
-            </li>
-            <li>
-              <a class="dropdown-item" (click)="logout()">{{ 'CABINET.PROFILE.LOGOUT' | translate }}</a>
-            </li>
-          </ul>
+        <!-- Language Switcher -->
+        <div class="lang-switch">
+          <button class="btn btn-sm" [class.active]="currentLang === 'en'" (click)="switchLang('en')">EN</button>
+          <button class="btn btn-sm" [class.active]="currentLang === 'ka'" (click)="switchLang('ka')">KA</button>
         </div>
+        <!-- Logout button -->
+        <button class="btn btn-sm btn-outline-danger" (click)="logout()">
+          <i class="bi bi-box-arrow-right"></i> {{ 'CABINET.PROFILE.LOGOUT' | translate }}
+        </button>
       </div>
     </div>
   </nav>

@@ -9,7 +9,7 @@ import { PagedResult } from '../../shared/models/base/paged-result.model';
   providedIn: 'root'
 })
 export class ProductsService {
-  private apiUrl = 'http://localhost:3000/products'; // შენი NestJS API base URL
+  private apiUrl = 'http://localhost:3000/products'; // NestJS API base URL
 
   constructor(private http: HttpClient) {}
 
@@ -18,9 +18,9 @@ export class ProductsService {
     return this.http.post<ResponseBase<ProductViewModel>>(this.apiUrl, product);
   }
 
-  // Read all
-  findAll(params?: any): Observable<ResponseBase<PagedResult<ProductViewModel[]>>> {
-    return this.http.get<ResponseBase<PagedResult<ProductViewModel[]>>>(this.apiUrl, { params });
+  // Read all - handles both paginated and non-paginated responses
+  findAll(params?: any): Observable<any> {
+    return this.http.get<any>(this.apiUrl, { params });
   }
 
   // Read one
@@ -29,7 +29,7 @@ export class ProductsService {
   }
 
   // Update
-  update(id: string, product: FormData): Observable<ResponseBase<ProductViewModel>> {
+  update(id: string, product: FormData | Partial<ProductViewModel>): Observable<ResponseBase<ProductViewModel>> {
     return this.http.patch<ResponseBase<ProductViewModel>>(`${this.apiUrl}/${id}`, product);
   }
 
@@ -38,3 +38,4 @@ export class ProductsService {
     return this.http.delete<ResponseBase<ProductViewModel>>(`${this.apiUrl}/${id}`);
   }
 }
+

@@ -11,6 +11,7 @@ import { User } from '../../../rest-api/users/user.model';
 export class AuthService {
     private apiUrl = `${environment.apiUrl}/auth`;
     private readonly TOKEN_KEY = 'jwt_token';
+    private readonly USER_ID_KEY = 'user_id';
       constructor(private http: HttpClient, private userService: UserService) { }
 
 
@@ -19,7 +20,12 @@ export class AuthService {
    login(email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/sign-in`, { email, password }).pipe(
       tap((response: any) => {
-        localStorage.setItem(this.TOKEN_KEY, response.value); 
+        localStorage.setItem(this.TOKEN_KEY, response.value);
+        // Decode token to extract userId
+        const payload = this.decodeToken(response.value);
+        if (payload && payload.userId) {
+          localStorage.setItem(this.USER_ID_KEY, payload.userId);
+        }
       }),
       map(() => this.getCurrentUser())
     );
@@ -34,40 +40,50 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem(this.TOKEN_KEY);
+    localStorage.removeItem(this.USER_ID_KEY);
   }
 
   getToken(): string | null {
     return localStorage.getItem(this.TOKEN_KEY);
   }
+
+  getUserId(): string | null {
+    return localStorage.getItem(this.USER_ID_KEY);
+  }
+
      isAuthenticated(): boolean {
     const token = localStorage.getItem(this.TOKEN_KEY);
     return !!token && !this.isTokenExpired(token);
   }
 
+  // Decode JWT token
+  private decodeToken(token: string): any {
+    try {
+      return JSON.parse(atob(token.split('.')[1]));
+    } catch {
+      return null;
+    }
+  }
+
   // Example method to decode and check token expiration
   private isTokenExpired(token: string): boolean {
-    const payload = JSON.parse(atob(token.split('.')[1]));
-    const expiry = payload.exp;
+    const payload = this.decodeToken(token);
+    const expiry = payload?.exp;
     return expiry ? expiry * 1000 < Date.now() : true;
   }
 
  public getCurrentUser(): Observable<User | undefined> {
-  const token = this.getToken();
-  if (!token) return of(undefined); // RxJS of()
+  const userId = this.getUserId();
+  if (!userId) return of(undefined);
 
-  try {
-    const payload = JSON.parse(atob(token.split('.')[1]));
-    return this.userService.getById(payload.userId).pipe(
-      map(user => ({
-        _id: user._id,
-        name: user.fullName,
-        email: user.email
-      })),
-      catchError(() => of(undefined))
-    );
-  } catch {
-    return of(undefined);
-  }
+  return this.userService.getById(userId).pipe(
+    map(user => ({
+      _id: user._id,
+      name: user.userName || user.email,
+      email: user.email
+    })),
+    catchError(() => of(undefined))
+  );
 }
 
 }

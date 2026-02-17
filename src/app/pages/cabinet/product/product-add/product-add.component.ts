@@ -63,7 +63,7 @@ export class ProductAddComponent implements OnInit {
     this.productService.create(formData).subscribe({
       next: (response) => {
         console.log('პროდუქტი შეიქმნა:', response);
-        this.router.navigate(['/products']);
+        this.router.navigate(['/cabinet/products']);
       },
       error: (error) => {
         console.error('შეცდომა:', error);
@@ -77,7 +77,7 @@ export class ProductAddComponent implements OnInit {
   }
 
   cancel(): void {
-    this.router.navigate(['/products']);
+    this.router.navigate(['/cabinet/products']);
   }
 
   private markFormGroupTouched(formGroup: FormGroup): void {

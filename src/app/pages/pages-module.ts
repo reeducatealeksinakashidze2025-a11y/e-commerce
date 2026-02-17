@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared-module';
 import { TranslateModule } from '@ngx-translate/core';
+import { CoreModule } from '../core/core-module';
 
 
 
@@ -24,7 +25,8 @@ import { TranslateModule } from '@ngx-translate/core';
      FormsModule,
      RouterModule,
      SharedModule,
-     TranslateModule
+     TranslateModule,
+     CoreModule
   ]
 })
 export class PagesModule { }

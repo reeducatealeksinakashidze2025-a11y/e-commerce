@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light" data-bs-theme="light">
   <div class="container">
-    <a class="navbar-brand" routerLink="/">Personal Blog</a>
+    <a class="navbar-brand" routerLink="/">{{ 'STORE_TITLE' | translate }}</a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
@@ -12,23 +12,29 @@
           <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{ 'HOME.TITLE' | translate }}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/blogs" routerLinkActive="active">{{ 'BLOG.TITLE' | translate }}</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" routerLink="/about" routerLinkActive="active">{{ 'ABOUT.TITLE' | translate }}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/newsletter" routerLinkActive="active">{{ 'NEWSLETTER.TITLE' | translate
-            }}</a>
         </li>
       </ul>
     </div>
 
     <div class="d-flex align-items-center gap-3 ms-3">
-      <app-theme-toggle></app-theme-toggle>
-   <button class="btn btn-outline-primary" routerLink="auth/login">
-        {{ 'LOGIN.TITLE' | translate }}
-      </button>
+      <!-- Language Switcher -->
+      <div class="lang-switch">
+        <button class="btn btn-sm" [class.active]="currentLang === 'en'" (click)="switchLang('en')">EN</button>
+        <button class="btn btn-sm" [class.active]="currentLang === 'ka'" (click)="switchLang('ka')">KA</button>
+      </div>
+
+      <!-- Auth Buttons -->
+      <div *ngIf="!isLoggedIn()" class="auth-buttons">
+        <button class="btn btn-outline-primary btn-sm" routerLink="/auth/login">
+          {{ 'LOGIN.TITLE' | translate }}
+        </button>
+      </div>
+      <div *ngIf="isLoggedIn()" class="auth-buttons">
+        <button class="btn btn-outline-danger btn-sm" (click)="logout()">
+          {{ 'CABINET.PROFILE.LOGOUT' | translate }}
+        </button>
+      </div>
     </div>
   </div>
 </nav>

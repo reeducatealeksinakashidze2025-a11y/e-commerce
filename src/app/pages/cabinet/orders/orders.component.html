@@ -1,0 +1,147 @@
+<div class="orders-container">
+  <div class="orders-header">
+    <h1>My Orders</h1>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <div class="orders-controls">
+    <div class="search-bar">
+      <input type="text" [(ngModel)]="searchTerm" placeholder="Search orders..." (keyup.enter)="onSearch()">
+      <button (click)="onSearch()">Search</button>
+    </div>
+    <div class="filter-section">
+      <select [(ngModel)]="statusFilter" (change)="onFilterChange()">
+        <option value="">All Status</option>
+        <option value="pending">Pending</option>
+        <option value="processing">Processing</option>
+        <option value="shipped">Shipped</option>
+        <option value="delivered">Delivered</option>
+        <option value="cancelled">Cancelled</option>
+      </select>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading" class="loading">
+    <p>Loading orders...</p>
+  </div>
+
+  <div *ngIf="!isLoading && orders && orders.length > 0">
+    <div class="orders-list">
+      <div class="order-card" *ngFor="let order of orders">
+        <div class="order-header">
+          <div class="order-info">
+            <h3>Order #{{ getOrderNumber(order._id) }}</h3>
+            <p class="order-date">{{ order.createdAt | date: 'medium' }}</p>
+          </div>
+          <div class="order-status">
+            <span class="badge" [ngClass]="getStatusBadgeClass(order.status)">
+              {{ order.status | uppercase }}
+            </span>
+          </div>
+        </div>
+
+        <div class="order-summary">
+          <div class="summary-item">
+            <span class="label">Total Items:</span>
+            <span class="value">{{ order.items.length || 0 }}</span>
+          </div>
+          <div class="summary-item">
+            <span class="label">Total Amount:</span>
+            <span class="value amount">${{ order.totalAmount.toFixed(2) }}</span>
+          </div>
+          <div class="summary-item">
+            <span class="label">Payment:</span>
+            <span class="value">{{ order.paymentMethod | uppercase }}</span>
+          </div>
+        </div>
+
+        <div class="order-items-preview">
+          <h4>Items</h4>
+          <ul class="items-list">
+            <li *ngFor="let item of order.items.slice(0, 2)">
+              <span>{{ item.name || 'Product' }} x{{ item.quantity }}</span>
+              <span>${{ (item.price * item.quantity).toFixed(2) }}</span>
+            </li>
+            <li *ngIf="order.items.length > 2" class="more-items">
+              +{{ order.items.length - 2 }} more items
+            </li>
+          </ul>
+        </div>
+
+        <div class="order-actions">
+          <button class="btn-view" (click)="viewOrderDetails(order)">View Details</button>
+          <button class="btn-invoice" (click)="downloadInvoice(order._id!)">Download Invoice</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination would go here if needed -->
+  </div>
+
+  <div *ngIf="!isLoading && (!orders || orders.length === 0)" class="empty-orders">
+    <p>You haven't placed any orders yet</p>
+    <button class="btn-shop" (click)="continueShopping()">Start Shopping</button>
+  </div>
+</div>
+
+<!-- Order Details Modal -->
+<div *ngIf="selectedOrder" class="modal-overlay" (click)="closeOrderDetails()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Order Details</h2>
+      <button class="close-btn" (click)="closeOrderDetails()">×</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="detail-section">
+        <h3>Order Information</h3>
+        <p><strong>Order ID:</strong> {{ selectedOrder._id }}</p>
+        <p><strong>Status:</strong> <span class="badge" [ngClass]="getStatusBadgeClass(selectedOrder.status)">{{ selectedOrder.status | uppercase }}</span></p>
+        <p><strong>Date:</strong> {{ selectedOrder.createdAt | date: 'medium' }}</p>
+      </div>
+
+      <div class="detail-section">
+        <h3>Items</h3>
+        <table class="items-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of selectedOrder.items">
+              <td>{{ item.name || 'Product' }}</td>
+              <td>${{ item.price.toFixed(2) }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>${{ (item.price * item.quantity).toFixed(2) }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="detail-section">
+        <h3>Shipping Address</h3>
+        <p>{{ selectedOrder.shippingAddress.street }}</p>
+        <p>{{ selectedOrder.shippingAddress.city }}, {{ selectedOrder.shippingAddress.postalCode }}</p>
+        <p>{{ selectedOrder.shippingAddress.country }}</p>
+      </div>
+
+      <div class="detail-section">
+        <h3>Payment Information</h3>
+        <p><strong>Payment Method:</strong> {{ selectedOrder.paymentMethod | uppercase }}</p>
+        <p><strong>Total Amount:</strong> <span class="amount">${{ selectedOrder.totalAmount.toFixed(2) }}</span></p>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-close" (click)="closeOrderDetails()">Close</button>
+      <button class="btn-invoice-modal" (click)="downloadInvoice(selectedOrder._id!)">Download Invoice</button>
+    </div>
+  </div>
+</div>

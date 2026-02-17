@@ -1,6 +1,6 @@
 // products-dashboard.component.ts
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../../../rest-api/products/products.service';
 
 @Component({
@@ -29,7 +29,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private productService: ProductsService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -94,15 +95,15 @@ export class DashboardComponent implements OnInit {
   }
 
   viewProduct(id: string): void {
-    this.router.navigate(['/products', id]);
+    this.router.navigate(['./products', id], { relativeTo: this.route });
   }
 
   editProduct(id: string): void {
-    this.router.navigate(['/products', id, 'edit']);
+    this.router.navigate(['./products', id, 'edit'], { relativeTo: this.route });
   }
 
   createProduct(): void {
-    this.router.navigate(['/products/new']);
+    this.router.navigate(['./products/new'], { relativeTo: this.route });
   }
 
   clearFilters(): void {

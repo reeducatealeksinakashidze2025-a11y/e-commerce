@@ -105,7 +105,7 @@ export class ProductEditComponent implements OnInit {
     this.productService.update(this.productId, formData).subscribe({
       next: (response) => {
         console.log('პროდუქტი განახლდა:', response);
-        this.router.navigate(['/products', this.productId]);
+        this.router.navigate(['/cabinet/products', this.productId]);
       },
       error: (error) => {
         console.error('შეცდომა:', error);
@@ -119,7 +119,7 @@ export class ProductEditComponent implements OnInit {
   }
 
   cancel(): void {
-    this.router.navigate(['/products', this.productId]);
+    this.router.navigate(['/cabinet/products', this.productId]);
   }
 
   private markFormGroupTouched(formGroup: FormGroup): void {

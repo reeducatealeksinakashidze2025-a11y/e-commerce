@@ -4,9 +4,22 @@
 
 <hr class="divider">
 
-<h2>{{ 'HOME.LASTBLOGS' | translate }}</h2>
-<div class="blogs-grid">
-  <!-- <app-blog-card *ngFor="let blog of blogs" [blog]="blog"></app-blog-card> -->
-   <!-- <app-product-card *ngFor="let item of product" [product]="item"></app-product-card> -->
+<h2>{{ 'HOME.LAST_PRODUCTS' | translate }}</h2>
+<div class="products-grid">
+  <div *ngFor="let item of product" class="product-card">
+    <div class="product-image">
+      <img *ngIf="item.images && item.images.length > 0" [src]="item.images[0] | cloudFrontImage" [alt]="item.name" />
+      <p *ngIf="!item.images || item.images.length === 0">{{ 'product.noImage' | translate }}</p>
+    </div>
+    <div class="product-info">
+      <h3>{{ item.name }}</h3>
+      <p class="category">{{ item.category }}</p>
+      <p class="description">{{ item.description }}</p>
+      <div class="product-footer">
+        <span class="price">{{ item.price }} GEL</span>
+        <!-- <span class="badge" *ngIf="item.isDiscounted">{{ 'product.discounted' | translate }}</span> -->
+      </div>
+    </div>
+  </div>
 </div>
 

@@ -7,6 +7,8 @@ import { ProductAddComponent } from './product/product-add/product-add.component
 import { ProductComponent } from './product/product.component';
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 import { ProductEditComponent } from './product/product-edit/product-edit.component';
+import { CartComponent } from './cart/cart.component';
+import { OrdersComponent } from './orders/orders.component';
 
 
 
@@ -37,6 +39,8 @@ const routes: Routes = [
       { path: 'products/new', component: ProductAddComponent },
       { path: 'products/:id', component: ProductDetailComponent },
       { path: 'products/:id/edit', component: ProductEditComponent },
+      { path: 'cart', component: CartComponent },
+      { path: 'orders', component: OrdersComponent },
       { path: 'profile', component: ProfileComponent },
       { path: '**', redirectTo: 'dashboard' },
     ],

@@ -22,9 +22,10 @@ export class HomeComponent implements OnInit {
   }
 
   loadLatestProducts() {
-    this.productsService.findAll().subscribe(res => {
-      this.product = (res.value?.items || [])
-       .sort((a, b) => {
+    this.productsService.findAll().subscribe((res: any) => {
+      const items = Array.isArray(res) ? res : (res.value?.items || res.data || []);
+      this.product = items
+       .sort((a: any, b: any) => {
     const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
     const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
     return dateB - dateA;

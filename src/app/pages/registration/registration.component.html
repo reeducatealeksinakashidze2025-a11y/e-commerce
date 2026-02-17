@@ -1,12 +1,12 @@
 <div class="register-container">
-  <h2 class="form-title">Register</h2>
+  <h2 class="form-title">{{ 'REGISTER.TITLE' | translate }}</h2>
   <div *ngIf="errorMessage" class="field-error">
     {{ errorMessage }}
   </div>
   <form (ngSubmit)="register(registerForm)" #registerForm="ngForm" class="register-form">
     <!-- First Name -->
     <div class="form-group">
-      <label for="fullName">Full Name</label>
+      <label for="fullName">{{ 'REGISTER.NAME' | translate }}</label>
       <input
         type="text"
         id="fullName"
@@ -24,7 +24,7 @@
    
     <!-- Birth Date -->
     <div class="form-group">
-      <label for="birthDate">Birth Date</label>
+      <label for="birthDate">{{ 'REGISTER.BIRTHDATE' | translate }}</label>
       <input
         type="date"
         id="birthDate"
@@ -40,7 +40,7 @@
   
     <!-- Gender -->
     <div class="form-group">
-      <label for="gender">Gender</label>
+      <label for="gender">{{ 'REGISTER.GENDER' | translate }}</label>
       <select
         id="gender"
         [(ngModel)]="gender"
@@ -48,10 +48,10 @@
         name="gender"
         required
       >
-        <option value="">Select Gender</option>
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-        <option value="other">Other</option>
+        <option value="">{{ 'REGISTER.SELECT_GENDER' | translate }}</option>
+        <option value="male">{{ 'REGISTER.MALE' | translate }}</option>
+        <option value="female">{{ 'REGISTER.FEMALE' | translate }}</option>
+        <option value="other">{{ 'REGISTER.OTHER' | translate }}</option>
       </select>
       <div *ngIf="genderRef.invalid && (genderRef.touched || registerForm.submitted)" class="field-error">
         Gender is required.
@@ -60,7 +60,7 @@
   
     <!-- Username -->
     <div class="form-group">
-      <label for="userName">Username</label>
+      <label for="userName">{{ 'REGISTER.USERNAME' | translate }}</label>
       <input
         type="text"
         id="userName"
@@ -76,7 +76,7 @@
     </div>
     <!-- Email -->
     <div class="form-group">
-      <label for="email">Email</label>
+      <label for="email">{{ 'REGISTER.EMAIL' | translate }}</label>
       <input
         type="email"
         id="email"
@@ -92,7 +92,7 @@
   
     <!-- Password -->
     <div class="form-group">
-      <label for="password">Password</label>
+      <label for="password">{{ 'REGISTER.PASSWORD' | translate }}</label>
       <input
         type="password"
         id="password"
@@ -103,13 +103,13 @@
         minlength="6"
       />
       <div *ngIf="passwordRef.invalid && (passwordRef.touched || registerForm.submitted)" class="field-error">
-        Password is required and must be at least 6 characters.
+        {{ 'REGISTER.PASSWORD_ERROR' | translate }}
       </div>
     </div>
   
     <!-- Confirm Password -->
     <div class="form-group">
-      <label for="confirmPassword">Confirm Password</label>
+      <label for="confirmPassword">{{ 'REGISTER.CONFIRM_PASSWORD' | translate }}</label>
       <input
         type="password"
         id="confirmPassword"
@@ -119,17 +119,17 @@
         required
       />
       <div *ngIf="confirmPasswordRef.invalid && (confirmPasswordRef.touched || registerForm.submitted)" class="field-error">
-        Confirm password is required.
+        {{ 'REGISTER.CONFIRM_PASSWORD_REQUIRED' | translate }}
       </div>
       <div *ngIf="password !== confirmPassword && confirmPasswordRef.touched" class="field-error">
-        Passwords do not match.
+        {{ 'REGISTER.PASSWORD_MISMATCH' | translate }}
       </div>
     </div>
   
-    <button type="submit" class="btn">Register</button>
+    <button type="submit" class="btn">{{ 'REGISTER.BUTTON' | translate }}</button>
   </form>
   
   <p class="home-link">
-    <a routerLink="/">Return to Home</a>
+    <a routerLink="/">{{ 'LOGIN.BACK_HOME' | translate }}</a>
   </p>
 </div>

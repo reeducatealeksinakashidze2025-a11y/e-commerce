@@ -72,7 +72,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   editProduct(): void {
-    this.router.navigate(['/products', this.productId, 'edit']);
+    this.router.navigate(['/cabinet/products', this.productId, 'edit']);
   }
 
   deleteProduct(): void {
@@ -82,7 +82,7 @@ export class ProductDetailComponent implements OnInit {
     this.isDeleting = true;
     this.productService.remove(this.productId).subscribe({
       next: () => {
-        this.router.navigate(['/products']);
+        this.router.navigate(['/cabinet/products']);
       },
       error: (error) => {
         console.error('შეცდომა:', error);
@@ -93,6 +93,6 @@ export class ProductDetailComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/products']);
+    this.router.navigate(['/cabinet/products']);
   }
 }

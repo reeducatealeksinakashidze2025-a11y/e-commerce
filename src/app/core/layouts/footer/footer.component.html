@@ -1,28 +1,27 @@
 <footer class="site-footer">
   <div class="footer-top">
     <div class="footer-brand">
-      <h2>ბლოგ პლატფორმა</h2>
-      <p>გაუზიარე შენი იდეები და დაუკომენტარე სხვებს</p>
+      <h2>{{ 'STORE_TITLE' | translate }}</h2>
+      <p>{{ 'FOOTER.BRAND_DESC' | translate }}</p>
     </div>
 
     <div class="footer-links">
       <div class="links-column">
-        <h4>ბლოგები</h4>
-        <a routerLink="/">მთავარი</a>
-        <a routerLink="/blog">ბლოგები</a>
-        <a routerLink="/about">ჩვენს შესახებ</a>
+        <h4>{{ 'FOOTER.SHOP' | translate }}</h4>
+        <a routerLink="/">{{ 'HOME.TITLE' | translate }}</a>
+        <a routerLink="/about">{{ 'ABOUT.TITLE' | translate }}</a>
       </div>
 
       <div class="links-column">
-        <h4>მომხმარებლებისთვის</h4>
-        <a routerLink="/auth/login">შესვლა</a>
-        <a routerLink="/auth/register">რეგისტრაცია</a>
+        <h4>{{ 'FOOTER.ACCOUNT' | translate }}</h4>
+        <a routerLink="/auth/login">{{ 'LOGIN.TITLE' | translate }}</a>
+        <a routerLink="/auth/register">{{ 'REGISTER.TITLE' | translate }}</a>
       </div>
     </div>
   </div>
 
   <div class="footer-bottom">
-    <p>© {{ currentYear }} ბლოგ პლატფორმა. ყველა უფლება დაცულია.</p>
+    <p>© {{ currentYear }} {{ 'STORE_TITLE' | translate }}. {{ 'FOOTER.RIGHTS' | translate }}</p>
   </div>
 </footer>
 

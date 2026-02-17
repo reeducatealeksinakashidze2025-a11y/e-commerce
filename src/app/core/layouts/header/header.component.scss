@@ -1,26 +1,91 @@
 .navbar {
   border-bottom: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 
-  .nav-link.active {
-    border-bottom: 2px solid #93CEFC;
-    font-weight: 600;
+  .navbar-brand {
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #27ae60 !important;
   }
 
-  .lang-switch button {
-    font-weight: 600;
-    color: #111827;
+  .nav-link {
+    margin: 0 8px;
+    font-weight: 500;
+    transition: color 0.3s ease;
 
     &:hover {
-      color:#93CEFC;
+      color: #27ae60 !important;
+    }
+
+    &.active {
+      border-bottom: 2px solid #27ae60;
+      font-weight: 600;
+      color: #27ae60 !important;
     }
   }
 }
 
-.navbar-toggler {
-  margin-left: auto; 
+.lang-switch {
+  display: flex;
+  gap: 4px;
+  border-radius: 6px;
+  background-color: #f0f0f0;
+  padding: 4px;
+
+  button {
+    padding: 4px 10px;
+    border: none;
+    background: transparent;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #666;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: #27ae60;
+    }
+
+    &.active {
+      background-color: white;
+      color: #27ae60;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+  }
 }
 
-.navbar-brand{
-  font-weight: 700;
-  font-size: 1.3rem;
+.auth-buttons {
+  display: flex;
+  gap: 8px;
+
+  .btn-outline-primary {
+    color: #27ae60;
+    border-color: #27ae60;
+
+    &:hover {
+      background-color: #27ae60;
+      border-color: #27ae60;
+    }
+  }
+
+  .btn-outline-danger {
+    color: #e74c3c;
+    border-color: #e74c3c;
+
+    &:hover {
+      background-color: #e74c3c;
+      border-color: #e74c3c;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .lang-switch,
+  .auth-buttons {
+    button {
+      font-size: 0.8rem;
+      padding: 3px 8px;
+    }
+  }
 }

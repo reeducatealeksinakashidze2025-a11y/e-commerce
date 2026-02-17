@@ -49,7 +49,7 @@
           <!-- Main Image -->
           <div class="main-image-wrapper" *ngIf="product.images?.length > 0">
             <img 
-              [src]="product.images[currentImageIndex]" 
+              [src]="product.images[currentImageIndex] | cloudFrontImage" 
               [alt]="product.name"
               class="main-image">
             
@@ -87,7 +87,7 @@
                 class="thumbnail"
                 [class.active]="i === currentImageIndex"
                 (click)="selectImage(i)">
-                <img [src]="image" [alt]="product.name + ' - ' + (i + 1)">
+                <img [src]="image | cloudFrontImage" [alt]="product.name + ' - ' + (i + 1)">
               </div>
             </div>
           </div>

@@ -1,9 +1,10 @@
 // products.component.ts
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ProductsService } from '../../../rest-api/products/products.service';
 import { ProductCategory } from '../../../shared/enums/products-category.enum';
+import { CloudFrontImageService } from '../../../core/services/cloudfront-image.service';
 
 @Component({
   selector: 'app-product',
@@ -20,7 +21,9 @@ export class ProductComponent implements OnInit {
   constructor(
     private productService: ProductsService,
     private router: Router,
-    private translate: TranslateService
+    private route: ActivatedRoute,
+    private translate: TranslateService,
+    private cloudFrontImageService: CloudFrontImageService
   ) {}
 
   ngOnInit(): void {
@@ -47,19 +50,23 @@ export class ProductComponent implements OnInit {
   }
 
   getMainImage(product: any): string {
-    return product?.images?.[0] || 'assets/images/no-image.png';
+    const imageName = product?.images?.[0];
+    if (!imageName) {
+      return 'assets/images/no-image.png';
+    }
+    return this.cloudFrontImageService.getImageUrl(imageName);
   }
 
   add(): void {
-    this.router.navigate(['/products/new']);
+    this.router.navigate(['./products/new'], { relativeTo: this.route.parent });
   }
 
   edit(id: string): void {
-    this.router.navigate(['/products', id, 'edit']);
+    this.router.navigate(['./products', id, 'edit'], { relativeTo: this.route.parent });
   }
 
   view(id: string): void {
-    this.router.navigate(['/products', id]);
+    this.router.navigate(['./products', id], { relativeTo: this.route.parent });
   }
 
   delete(id: string): void {
