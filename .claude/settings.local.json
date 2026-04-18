@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//d/d/Curse/Nest Js ReEducate/Projects/e-commerce/src/**)",
+      "Bash(node -e \"const d=require\\('./angular.json'\\);const p=Object.values\\(d.projects\\)[0];const o=p.architect.build.options;console.log\\(JSON.stringify\\(Object.keys\\(o\\)\\)\\);console.log\\('zone:',JSON.stringify\\(o.zone\\)\\);console.log\\('main:',JSON.stringify\\(o.main\\)\\)\")"
+    ]
+  }
+}

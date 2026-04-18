@@ -21,7 +21,6 @@ export class LayoutComponent implements OnInit {
   ngOnInit(): void {
     const savedLang = localStorage.getItem('language') || 'en';
     this.currentLang = savedLang;
-    this.translate.use(savedLang);
   }
 
   switchLang(lang: string) {

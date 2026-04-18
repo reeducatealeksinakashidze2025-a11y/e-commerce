@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"const d=require\\('./angular.json'\\);const p=Object.values\\(d.projects\\)[0];console.log\\(JSON.stringify\\(p.architect.build,null,2\\)\\)\")",
+      "Bash(node -e \"const p=require\\('./package.json'\\);console.log\\('@angular/core:',p.dependencies['@angular/core']\\);console.log\\('@ngx-translate/core:',p.dependencies['@ngx-translate/core']\\);console.log\\('zone.js:',p.dependencies['zone.js']||p.devDependencies['zone.js']\\)\")"
+    ]
+  }
+}
